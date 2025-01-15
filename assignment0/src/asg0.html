@@ -1,0 +1,59 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Paint Canvas</title>
+    </head>
+
+    <body onload="main()">
+
+        <canvas id="main-canvas" width="400" height="400">
+            Please use a browser that supports "canvas"
+        </canvas>
+
+        <br>
+        <label>V1: </label>
+        <label for="x-v1">x</label>
+        <input type="number" id="x-v1" placeholder="X coordinate">
+
+        <label for="y-v1">y</label>
+        <input type="number" id="y-v1" placeholder="Y coordinate">
+
+        <br>
+        <label>V2: </label>
+        <label for="x-v2">x</label>
+        <input type="number" id="x-v2" placeholder="X coordinate">
+
+        <label for="y-v2">y</label>
+        <input type="number" id="y-v2" placeholder="Y coordinate">
+
+        <br>
+        <button id="draw-button">Draw</button>
+
+        
+        <br><br>
+        <label for="operation">Operation: </label>
+        <select name="Operation" id="Operation">
+            <option value="Add">Add</option>
+            <option value="Subtract">Subtract</option>
+            <option value="Multiply">Multiply</option>
+            <option value="Divide">Divide</option>
+            <option value="Magnitude">Magnitude</option>
+            <option value="Normalize">Normalize</option>
+            <option value="Angle">Angle between</option>
+            <option value="Area">Area</option>
+        </select>
+
+        <label for="scalar">Scalar: </label>
+        <input type="number" id="scalar" placeholder="Scalar">
+
+        <br>
+        <button id="operation-button">Draw</button>
+
+        <script src="lib/cuon-matrix-cse160.js"></script>
+        <script src="asg0.js"></script>
+
+    </body>
+
+</html>
