@@ -106,11 +106,11 @@ let g_baseAngle = 0;
 let g_midAngle = 0;
 let g_tipAngle = 0;
 let g_animation = false;
+let g_shiftAnimation = false;
+
 
 let g_upper_whale_color = [.0745, .1372549, .415686, 1.0];
 let g_lower_whale_color = [.8, .8, .8, 1.0];
-
-
 
 
 function addActionsForHtmlUI() {
@@ -181,14 +181,21 @@ function addMouseControls() {
     let lastX;
 
     canvas.addEventListener('mousedown', (event) => {
-        isDragging = true;
-        lastX = event.clientX;
+        if (event.shiftKey) {
+            g_shiftAnimation = !g_shiftAnimation; // Toggle animation
+            if (g_shiftAnimation) {
+                animateRotation(); // Start animation
+            }
+        } else {
+            isDragging = true;
+            lastX = event.clientX;
+        }
     });
 
     canvas.addEventListener('mousemove', (event) => {
         if (isDragging) {
             let deltaX = event.clientX - lastX;
-            g_globalAngle += deltaX * 0.5; // Adjust sensitivity as needed
+            g_globalAngle += deltaX * 0.5; // Adjust sensitivity
             lastX = event.clientX;
             renderAllShapes();
         }
@@ -201,6 +208,15 @@ function addMouseControls() {
     canvas.addEventListener('mouseleave', () => {
         isDragging = false;
     });
+}
+
+function animateRotation() {
+    if (!g_shiftAnimation) return; // Stop animation if flag is turned off
+
+    g_globalAngle += 2; // Adjust rotation speed
+    renderAllShapes();
+
+    requestAnimationFrame(animateRotation); // Recursively call animation
 }
 
 
