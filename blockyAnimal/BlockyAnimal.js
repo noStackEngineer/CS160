@@ -182,9 +182,9 @@ function addMouseControls() {
 
     canvas.addEventListener('mousedown', (event) => {
         if (event.shiftKey) {
-            g_shiftAnimation = !g_shiftAnimation; // Toggle animation
-            if (g_shiftAnimation && !animationFrameId) {
-                animateRotation(); // Start animation
+            if (!g_shiftAnimation) { // Prevent re-triggering while animation is running
+                g_shiftAnimation = true;
+                animateRotation();
             }
         } else {
             isDragging = true;
@@ -210,22 +210,34 @@ function addMouseControls() {
     });
 }
 
-let animationFrameId = null; // Track animation frame
 
 function animateRotation() {
-    if (!g_shiftAnimation) {
-        if (animationFrameId) {
-            cancelAnimationFrame(animationFrameId); // Stop animation if flag is off
-            animationFrameId = null;
+    if (!g_shiftAnimation) return; // Ensure animation runs only when triggered
+
+    let startTime = performance.now(); // Record the start time
+    let duration = 1000; // 1 second animation
+    let initialAngle = g_globalAngle;
+
+    function step(currentTime) {
+        let elapsed = currentTime - startTime;
+        if (elapsed >= duration) {
+            g_globalAngle = initialAngle; // Reset to initial position after animation
+            renderAllShapes();
+            g_shiftAnimation = false; // Stop animation
+            return;
         }
-        return;
+
+        // Create a "wiggle" effect using sine function
+        let wiggleAmount = Math.sin(elapsed / 100 * Math.PI * 2) * 10; // Adjust amplitude
+        g_globalAngle = initialAngle + wiggleAmount;
+
+        renderAllShapes();
+        requestAnimationFrame(step);
     }
 
-    g_globalAngle += 2; // Adjust rotation speed
-    renderAllShapes();
-
-    animationFrameId = requestAnimationFrame(animateRotation); // Save animation frame ID
+    requestAnimationFrame(step);
 }
+
 
 
 // Draw every shape that is supposed to be on the canvas
