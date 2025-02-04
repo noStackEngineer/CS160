@@ -183,7 +183,7 @@ function addMouseControls() {
     canvas.addEventListener('mousedown', (event) => {
         if (event.shiftKey) {
             g_shiftAnimation = !g_shiftAnimation; // Toggle animation
-            if (g_shiftAnimation) {
+            if (g_shiftAnimation && !animationFrameId) {
                 animateRotation(); // Start animation
             }
         } else {
@@ -210,13 +210,21 @@ function addMouseControls() {
     });
 }
 
+let animationFrameId = null; // Track animation frame
+
 function animateRotation() {
-    if (!g_shiftAnimation) return; // Stop animation if flag is turned off
+    if (!g_shiftAnimation) {
+        if (animationFrameId) {
+            cancelAnimationFrame(animationFrameId); // Stop animation if flag is off
+            animationFrameId = null;
+        }
+        return;
+    }
 
     g_globalAngle += 2; // Adjust rotation speed
     renderAllShapes();
 
-    requestAnimationFrame(animateRotation); // Recursively call animation
+    animationFrameId = requestAnimationFrame(animateRotation); // Save animation frame ID
 }
 
 
