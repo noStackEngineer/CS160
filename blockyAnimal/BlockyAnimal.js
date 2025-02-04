@@ -141,6 +141,7 @@ function main() {
     // Set up actions for HTML UI elements such as buttons
     addActionsForHtmlUI();
 
+    addMouseControls();
 
     // Specify the color for clearing <canvas>
     gl.clearColor(0.102353, 0.553137, .9, 1.0);
@@ -175,6 +176,32 @@ function updateAnimationAngles() {
     }
 }
 
+function addMouseControls() {
+    let isDragging = false;
+    let lastX;
+
+    canvas.addEventListener('mousedown', (event) => {
+        isDragging = true;
+        lastX = event.clientX;
+    });
+
+    canvas.addEventListener('mousemove', (event) => {
+        if (isDragging) {
+            let deltaX = event.clientX - lastX;
+            g_globalAngle += deltaX * 0.5; // Adjust sensitivity as needed
+            lastX = event.clientX;
+            renderAllShapes();
+        }
+    });
+
+    canvas.addEventListener('mouseup', () => {
+        isDragging = false;
+    });
+
+    canvas.addEventListener('mouseleave', () => {
+        isDragging = false;
+    });
+}
 
 
 // Draw every shape that is supposed to be on the canvas
@@ -447,29 +474,6 @@ function renderAllShapes(){
     fin_two.matrix.translate(-.22, -.15, -.25)
     fin_two.matrix.scale(.4, .1, .15);
     fin_two.render()
-
-
-//    let leftArm = new Cube();
-//    leftArm.color = [1, 0, 1.0, 1.0];
-//    leftArm.matrix.setTranslate(0, -.5, 0);
-//    leftArm.matrix.rotate(-5, 1, 0, 0);
-
-//    leftArm.matrix.rotate(-g_armAngle, 0, 0, 1);
-    
-//    let handCoordinateMat = new Matrix4(leftArm.matrix);
-//    leftArm.matrix.scale(.25, .7, .5);
-//    leftArm.matrix.translate(-.5, 0, 0);
-//    leftArm.render();
-
-//    let box = new Cube();
-//    box.color = [.6, 0.4, 0.0, 1.0];
-//    box.matrix = handCoordinateMat;
-//    box.matrix.translate(0, .65, 0);
-//    box.matrix.rotate(-g_handAngle, 0, 0, 1);
-//    box.matrix.rotate(0, 1, 0, 0);
-//    box.matrix.scale(.3, .3, .3);
-//    box.matrix.translate(-.5, 0, -.001);
-//    box.render();
 
     // Check the time passed at completion, then print
     let duration = performance.now() - startTime;
