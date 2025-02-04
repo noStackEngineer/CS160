@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Blocky Animal</title>
+    
+  </head>
+
+  <body style="background-color: white;" onload="main()">
+    <canvas id="webgl" width="400" height="400">
+    Please use a browser that supports "canvas"
+    </canvas>
+
+    <p id="counter">XXX </p>
+
+  
+    <p>
+    <br>
+    Camera Angle <input type="range" min="-180" max="180" value="35" class="slider" id="angleSlider">
+
+    <p>
+    <br>
+    Camera FOV <input type="range" min="15" max="100" value="30" step="1" class="slider" id="fovSlider">
+
+    <p>
+    <br>
+    Camera Zoom <input type="range" min="15" max="100" value="60" step="1" class="slider" id="zoomSlider">
+
+    <p>
+    <br>
+    Base Tail Slider <input type="range" min="-13" max="13" value="0" class="slider" id="baseSlider">
+
+    <p>
+    <br>
+    Mid Tail Slider <input type="range" min="-12" max="10" value="0" class="slider" id="midSlider">
+
+    <p>
+    <br>
+    Tail Tip Slider <input type="range" min="-15" max="15" value="0" class="slider" id="tipSlider">
+  
+    Animation:
+    <button type="button" id="animateON">ON</button>
+    <button type="button" id="animateOFF">OFF</button>
+
+
+    <script src="../lib/webgl-utils.js"></script>
+    <script src="../lib/webgl-debug.js"></script>
+    <script src="../lib/cuon-utils.js"></script>
+    <script src="../lib/cuon-matrix-cse160.js"></script>
+
+    <script src="Triangle.js"></script>
+    <script src="Cube.js"></script>
+    <script src="Pyramid.js"></script>
+    <script src="BlockyAnimal.js"></script>
+
+  </body>
+</html>
