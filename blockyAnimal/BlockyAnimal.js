@@ -182,9 +182,9 @@ function addMouseControls() {
 
     canvas.addEventListener('mousedown', (event) => {
         if (event.shiftKey) {
-            if (!g_shiftAnimation) { // Prevent re-triggering while animation is running
+            if (!g_shiftAnimation) {
                 g_shiftAnimation = true;
-                animateRotation();
+                animateRotation(); // Start shift-click animation
             }
         } else {
             isDragging = true;
@@ -211,25 +211,24 @@ function addMouseControls() {
 }
 
 
-function animateRotation() {
-    if (!g_shiftAnimation) return; // Ensure animation runs only when triggered
 
-    let startTime = performance.now(); // Record the start time
-    let duration = 1000; // 1 second animation
-    let initialAngle = g_globalAngle;
+let g_animationAngle = 0; // Temporary variable for animation
+
+function animateRotation() {
+    let startTime = performance.now();
+    let duration = 1000; // 1-second dance
 
     function step(currentTime) {
         let elapsed = currentTime - startTime;
         if (elapsed >= duration) {
-            g_globalAngle = initialAngle; // Reset to initial position after animation
-            renderAllShapes();
+            g_animationAngle = 0; // Reset animation
             g_shiftAnimation = false; // Stop animation
+            renderAllShapes();
             return;
         }
 
-        // Create a "wiggle" effect using sine function
-        let wiggleAmount = Math.sin(elapsed / 100 * Math.PI * 2) * 10; // Adjust amplitude
-        g_globalAngle = initialAngle + wiggleAmount;
+        // Create a smooth oscillation (like a wiggle)
+        g_animationAngle = Math.sin(elapsed / 200 * Math.PI * 4) * 10; // Adjust speed & amplitude
 
         renderAllShapes();
         requestAnimationFrame(step);
@@ -240,13 +239,15 @@ function animateRotation() {
 
 
 
+
+
 // Draw every shape that is supposed to be on the canvas
 function renderAllShapes(){
     
     // Check the initial time at function call
     let startTime = performance.now();
 
-    let globalRotMat = new Matrix4().rotate(g_globalAngle,0,1,0);
+    let globalRotMat = new Matrix4().rotate(g_globalAngle + g_animationAngle, 0, 1, 0);
     gl.uniformMatrix4fv(u_GlobalRotateMatrix, false, globalRotMat.elements);
 
     // Set up the camera (View Matrix)
