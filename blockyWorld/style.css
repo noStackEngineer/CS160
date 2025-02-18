@@ -1,0 +1,18 @@
+#message-container {
+    font-family: 'Courier New', Courier, monospace; 
+    color: #39FF14; 
+    text-shadow: 0 0 5px #39FF14, 0 0 10px #39FF14, 0 0 20px #39FF14, 0 0 40px #39FF14;
+    width: 6000px;
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+    overflow-y: auto;
+}
+#permanent-message {
+    color: #39FF14; 
+    text-shadow: 0 0 5px #39FF14, 0 0 10px #39FF14, 0 0 20px #39FF14, 0 0 40px #39FF14;
+    font-family: 'Courier New', Courier, monospace; 
+}
+.message {
+    margin-bottom: 2px;
+}
