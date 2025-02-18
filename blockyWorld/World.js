@@ -238,7 +238,7 @@ function initializeMap() {
             for (let z = 0; z < columnHeight; z++) {
                 if (g_map[x][y][z] === 1) { // Only create a cube if there is a 1 in the map
                     let cube = new Cube();
-                    cube.textureNum = (x === reservedX && y === reservedY) ? 5 : 3;
+                    cube.textureNum = (x === reservedX && y === reservedY) ? 5 : Math.floor(Math.random() * 4);
                     cube.matrix.translate(x - width / 2, z - .75, y - depth / 2); // Adjust position based on z height
                     g_cubes.push(cube);
                 }
