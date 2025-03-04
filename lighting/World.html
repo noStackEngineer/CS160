@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Block World</title>
+      <link rel="stylesheet" href="style.css">
+  </head>
+
+  <body style="background-color: gray; color: white;" onload="main()">
+
+    <div id="container">
+        <canvas id="webgl">
+            Please use a browser that supports "canvas"
+        </canvas>
+    </div>
+
+    <div id="controls">
+      <p>Normal:
+        <button type="button" id="normalOn">ON</button>
+        <button type="button" id="normalOff">OFF</button>
+        <br>
+      Animation:
+        <button type="button" id="animateON">ON</button>
+        <button type="button" id="animateOFF">OFF</button>
+        <br>
+      Light:
+        <button type="button" id="lightOn">ON</button>
+        <button type="button" id="lightOff">OFF</button>
+      <p>
+        Light X <input type="range" min="-250" max="250" value="0" class="slider" id="xSlider">
+        <br>
+        Light Y <input type="range" min="-250" max="250" value="100" class="slider" id="ySlider">
+        <br>
+        Light Z <input type="range" min="-250" max="250" value="-200" class="slider" id="zSlider">
+      </p>
+
+      <p>Camera Angle:
+      <input type="range" min="-180" max="180" value="0" class="slider" id="angleSlider">
+
+      <br>
+      Spotlight:
+      <button type="button" id="spotlightOn">ON</button>
+      <button type="button" id="spotlightOff">OFF</button>
+      <input type="color" id="spotlightColor" name="spotlightColor" value="#e66465" /></p>
+      
+    </div>
+
+    <p id="counter">XXX </p>
+    
+
+
+<!--  
+    <p>
+    <br>
+    Camera FOV <input type="range" min="15" max="100" value="30" step="1" class="slider" id="fovSlider">
+
+    <p>
+    <br>
+    Camera Zoom <input type="range" min="15" max="100" value="60" step="1" class="slider" id="zoomSlider">
+-->  
+
+    <script src="../lib/webgl-utils.js"></script>
+    <script src="../lib/webgl-debug.js"></script>
+    <script src="../lib/cuon-utils.js"></script>
+    <script src="../lib/cuon-matrix-cse160.js"></script>
+
+    <script src="Cube.js"></script>
+    <script src="Pyramid.js"></script>
+    <script src="Triangle.js"></script>
+    <script src="Sphere.js"></script>
+    <script src="Camera.js"></script>
+    <script src="World.js"></script>
+
+  </body>
+</html>
