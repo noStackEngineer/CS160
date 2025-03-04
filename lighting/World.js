@@ -128,7 +128,7 @@ const FSHADER_SOURCE = `
         } else if (u_spotlightOn) {
             vec3 finalColor = ambient + spotDiffuse;
             if (u_whichTexture == 0) {
-                gl_FragColor = vec4(finalColor + specular, 1.0);
+                gl_FragColor = vec4(finalColor, 1.0);
             } else {
                 gl_FragColor = vec4(finalColor, 1.0);
             }
